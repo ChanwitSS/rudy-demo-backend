@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: rudy_postgres
+    image: postgres
+    environment:
+      - POSTGRES_DB=rudy
+      - POSTGRES_USER=rudy
+      - POSTGRES_PASSWORD=rudy
+    ports:
+      - "5432:5432"
