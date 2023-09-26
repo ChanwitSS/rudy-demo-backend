@@ -23,7 +23,7 @@ import { loadDbConfig } from './config/orm.config';
       inject: [ConfigService],
     }),
     MulterModule.register({
-      dest: './upload',
+      dest: '../public',
     }),
     AuthModule,
     MainModule,

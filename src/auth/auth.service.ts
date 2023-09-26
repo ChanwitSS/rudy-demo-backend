@@ -31,12 +31,21 @@ export class AuthService {
   }
 
   async register(dto: RegisterDto) {
-    const user = await this.userRepository.findOne({ where: { email: dto.email } });
+    let user: any
+    user = await this.userRepository.findOne({ where: { email: dto.email } });
     if (!user) {
-      return this.userRepository.create({
+      user = this.userRepository.save({
         ...dto,
         password: await hashPassword(dto.password),
       })
+
+      const payload = {
+        id: user.id,
+        email: user.email,
+      };
+      return {
+        accessToken: this.jwtService.sign(payload),
+      };
     }
 
     throw new UnauthorizedException('Email Exist.');
